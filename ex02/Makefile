@@ -6,7 +6,7 @@
 #    By: ltuffery <ltuffery@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/25 17:52:34 by ltuffery          #+#    #+#              #
-#    Updated: 2024/02/27 18:04:48 by ltuffery         ###   ########.fr        #
+#    Updated: 2024/02/29 15:21:09 by ltuffery         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 SRCS	= main.cpp \
-		  BitcoinExchange.cpp
+		  PmergeMe.cpp
 
 OBJS	= $(SRCS:%.cpp=%.o)
 
