@@ -54,24 +54,32 @@ class PmergeMe
 		template<typename T>
 		static int binarySearch(T &arr, int start, int end, int n)
 		{
-			if (start == end)
+        	int mid = start + (end - start) / 2;
+			
+			if (start <= end) {
+				if (arr[mid] < n)
+				{
+            		return binarySearch(arr, mid + 1, end, n);
+        		} 
+				else 
+				{
+            		return binarySearch(arr, start, mid - 1, n);
+        		}
+    		}
+
+			return mid;
+		}
+
+		template<typename T>
+		static int find(T &arr, int n)
+		{
+			for (size_t i = 0; i < arr.size(); i++)
 			{
-				return start;
+				if (arr[i] == n)
+					return i;
 			}
 
-			int mid = (start + end) / 2;
-
-			if ((start + end % 2) == 0)
-			{
-				mid++;
-			}
-
-			if (arr[mid] > n)
-			{
-				return binarySearch(arr, start, mid, n);
-			}
-
-			return binarySearch(arr, mid, end, n);
+			return -1;
 		}
 
 		static bool isStrDigit(std::string s);

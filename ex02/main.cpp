@@ -17,8 +17,41 @@ void vectorSort(char **av)
 
 	maxList.insert(maxList.begin(), PmergeMe::findMinOf(maxList[0], pairs));
 
-	for (int i = 1; i < 10; i++)
-		std::cout << "num : " << PmergeMe::jacobsthal(i) * 2 << std::endl;
+	std::vector<int> sorted = maxList;
+	int index = 1;
+	size_t js = PmergeMe::jacobsthal(index) * 2;
+	size_t total = js;
+	int sortedIndex;
+
+	while (sorted.size() < (pairs.size() * 2))
+	{
+		for (size_t tmp = 0; tmp < js; tmp++)
+		{
+			if ((1 + total - tmp) > pairs.size())
+				continue;
+			
+			int min = PmergeMe::findMinOf(maxList[1 + total - tmp], pairs);
+			sortedIndex = PmergeMe::find(sorted, maxList[1 + total - tmp]);
+			int bIndex = PmergeMe::binarySearch(sorted, 0, sortedIndex, min);
+
+			sorted.insert(sorted.begin() + bIndex, min);
+		}
+		index++;
+		js = std::min(PmergeMe::jacobsthal(index) * 2, (int)pairs.size() - 1);
+		total += js;
+	}
+
+	if (c.size() % 2)
+	{
+		int bIndex = PmergeMe::binarySearch(sorted, 0, sorted.size() - 1, c.back());
+
+		sorted.insert(sorted.begin() + bIndex, c.back());
+	}
+
+	for (size_t i = 0; i < sorted.size(); i++)
+	{
+		std::cout << "max : " << sorted[i] << std::endl;
+	}
 }
 
 int main(int ac, char **av)
