@@ -82,8 +82,26 @@ class PmergeMe
 			return -1;
 		}
 
+		template<typename T>
+		static void mergeSort(T& array, int left, int right)
+		{
+			if (left < right)
+			{
+				int mid = left + (right - left) / 2;
+
+				mergeSort(array, left, mid);
+				mergeSort(array, mid + 1, right);
+
+				std::vector<int> tempArray(right - left + 1);
+				std::merge(array.begin() + left, array.begin() + mid + 1,
+						array.begin() + mid + 1, array.begin() + right + 1,
+						tempArray.begin());
+
+				std::copy(tempArray.begin(), tempArray.end(), array.begin() + left);
+			}
+		}
+
 		static bool isStrDigit(std::string s);
-		static void mergeSort(std::vector<int>& array, int left, int right);
 		static size_t findMinOf(int max, std::vector<std::pair<int, int> > pairs);
 		static int jacobsthal(int n);
 };
