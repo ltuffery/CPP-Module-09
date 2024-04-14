@@ -66,6 +66,10 @@ void RPN::calc(char c)
 			this->_c.push(first * last);
 			break;
 		default:
+			if (last == 0)
+			{
+				throw std::runtime_error("Error: impossible to divide by 0");
+			}
 			this->_c.push(first / last);
 			break;
 	}
